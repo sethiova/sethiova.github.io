@@ -1,0 +1,410 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Max Dev | Portafolio Profesional">
+  <main>
+    <!-- Hero Section -->
+    <section class="section hero-section">
+      <div class="container mobile-reverse grid-2" style="align-items: center;">
+        <div class="hero-content animate-fade-in">
+          <span class="badge">Disponible para nuevos proyectos</span>
+          <h1>Desarrollador Web & <br /><span class="text-gradient">Becario IT</span></h1>
+          <p>
+            Hola, soy <strong>Max</strong>. Estudiante de la  
+            <a href="https://www.ucol.mx/" target="_blank">Universidad de Colima</a> y actualmente 
+            <strong>Becario IT en </strong><a href="https://www.isaosa.mx/" target="_blank">ISAOSA</a>. Me especializo en crear soluciones digitales modernas y eficientes.
+          </p>
+          <div class="cta-group">
+            <a href="#projects" class="btn btn-primary">Ver Proyectos</a>
+            <a href="https://www.linkedin.com/in/maximiliano-mendoza-dev/" target="_blank" class="btn btn-outline">LinkedIn</a>
+            <a href="#contact" class="btn btn-outline" style="border: none; padding-left: 0;">Contáctame &darr;</a>
+          </div>
+        </div>
+        <div class="hero-image animate-fade-in">
+          <div class="image-wrapper relative-container">
+             <div class="glow-effect"></div>
+             <img src="/perfil.jpg" alt="Max - Developer Profile" class="profile-image animate-fade-in" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="section bg-dim">
+      <div class="container">
+        <div class="grid-2 about-wrapper">
+          <div class="about-text">
+            <h2>Sobre mí</h2>
+            <p>
+              Soy un apasionado estudiante de la carrera de <strong>Ingeniería de Software</strong> en la Universidad de Colima.
+              Mi viaje en el mundo del código comenzó con la curiosidad de entender cómo funcionaban las cosas y se ha transformado en 
+              una carrera profesional donde busco constantemente innovar.
+            </p>
+            <p>
+              Actualmente, compagino mis estudios con mi rol como <strong>Becario de TI en ISAOSA</strong>, donde tengo la oportunidad 
+              de aplicar mis conocimientos en un entorno empresarial real, resolviendo problemas y optimizando procesos críticos.
+            </p>
+            <div class="skills-mini">
+              <h4>Stack Principal:</h4>
+              <div class="tags">
+                <span class="tech-tag">JavaScript / TypeScript</span>
+                <span class="tech-tag">Astro</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">SQL</span>
+                <span class="tech-tag">Git</span>
+              </div>
+            </div>
+          </div>
+          <div class="glass-card objective-card">
+            <h3>Mi Objetivo</h3>
+            <p>
+              Busco consolidarme como un desarrollador Full Stack capaz de liderar proyectos que impacten positivamente a los usuarios. 
+              Me entusiasma aprender nuevas tecnologías y metodologías ágiles.
+            </p>
+            <div class="stat-row">
+              <div class="stat">
+                <span class="number">3+</span>
+                <span class="label">Años programando</span>
+              </div>
+              <div class="stat">
+                <span class="number">10+</span>
+                <span class="label">Repositorios</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+      <div class="container">
+        <h2>Experiencia Laboral</h2>
+        <div class="timeline">
+          
+          <div class="glass-card timeline-item">
+            <div class="timeline-header">
+              <h3>Becario IT</h3>
+              <a href="https://www.isaosa.mx/" target="_blank" class="company text-gradient" style="text-decoration: none;">ISAOSA</a>
+              <span class="date">Actualidad</span>
+            </div>
+            <p>
+              Desarrollo y soporte de sistemas internos. Colaboración en la implementación de soluciones tecnológicas para optimizar procesos de la empresa líder en nutrición vegetal.
+            </p>
+            <ul class="tags">
+              <li>Soporte Técnico</li>
+              <li>Desarrollo Web</li>
+              <li>Sistemas IT</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2>Proyectos Destacados</h2>
+        <p>Una selección de mis proyectos en GitHub.</p>
+        
+        <div class="grid-3">
+          <!-- Proyecto 1 -->
+          <article class="glass-card project-card">
+            <div class="project-content">
+              <h3>AR Light Switch Unity</h3>
+              <p>Simulador AR en Unity para aprender circuitos eléctricos residenciales (sencillos y de escalera). Visualización 3D e interacción en tiempo real.</p>
+              <div class="project-meta">
+                <span class="tech-tag">Unity</span>
+                <span class="tech-tag">C#</span>
+                <span class="tech-tag">AR</span>
+              </div>
+              <a href="https://github.com/sethiova/AR-Light-Switch-Unity-App" target="_blank" class="link-arrow">Ver en GitHub &rarr;</a>
+            </div>
+          </article>
+
+          <!-- Proyecto 2 -->
+          <article class="glass-card project-card">
+            <div class="project-content">
+              <h3>Seguros App</h3>
+              <p>App móvil para gestión de seguros (autos, personales, empresariales) con recomendaciones personalizadas y chat con proveedores.</p>
+              <div class="project-meta">
+                <span class="tech-tag">Mobile App</span>
+                <span class="tech-tag">UX/UI</span>
+              </div>
+              <a href="https://github.com/sethiova/Seguros-App" target="_blank" class="link-arrow">Ver en GitHub &rarr;</a>
+            </div>
+          </article>
+
+          <!-- Proyecto 3 -->
+           <article class="glass-card project-card">
+            <div class="project-content">
+              <h3>API & Bases de Datos</h3>
+              <p>Sistema backend enfocado en el manejo avanzado de datos mediante APIs REST y Procedimientos Almacenados complejos.</p>
+              <div class="project-meta">
+                <span class="tech-tag">SQL</span>
+                <span class="tech-tag">API Design</span>
+                <span class="tech-tag">Backend</span>
+              </div>
+              <a href="https://github.com/sethiova/Practica-API-Bases-de-Datos-Avanzadas" target="_blank" class="link-arrow">Ver en GitHub &rarr;</a>
+            </div>
+          </article>
+      
+          <!-- Proyecto 4 -->
+          <article class="glass-card project-card">
+            <div class="project-content">
+              <h3>Python Math Solver</h3>
+              <p>Herramienta computacional para resolver problemas de programación lineal (Simplex, Gran M, Dos Fases) con cálculos automatizados.</p>
+              <div class="project-meta">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Algorithms</span>
+                <span class="tech-tag">Math</span>
+              </div>
+              <a href="https://github.com/sethiova/ExamTeamPI5" target="_blank" class="link-arrow">Ver en GitHub &rarr;</a>
+            </div>
+          </article>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="https://github.com/sethiova" target="_blank" class="btn btn-outline">Ver todo en GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="glass-card contact-wrapper">
+          <div style="text-align: center;">
+            <h2>Hablemos</h2>
+            <p>Estoy interesado en nuevas oportunidades de colaboración y desarrollo. ¿Tienes un proyecto en mente?</p>
+            <div class="cta-group" style="justify-content: center;">
+              <a href="mailto:max@example.com" class="btn btn-primary">Enviar Correo</a>
+              <a href="https://www.linkedin.com/in/maximiliano-mendoza-dev/" target="_blank" class="btn btn-outline">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</Layout>
+
+<style>
+  /* Hero Specifics */
+  .hero-section {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    padding-top: 100px; /* Offset for fixed nav */
+  }
+
+  .badge {
+    background: rgba(139, 92, 246, 0.1);
+    color: var(--color-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+  }
+
+  .cta-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  /* Code Mockup */
+  .code-block-mockup {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    position: relative;
+  }
+  
+  .code-block-mockup::before {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 12px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 12"><circle cx="6" cy="6" r="6" fill="%23ff5f56"/><circle cx="26" cy="6" r="6" fill="%23ffbd2e"/><circle cx="46" cy="6" r="6" fill="%2327c93f"/></svg>') no-repeat;
+    margin-bottom: 1rem;
+  }
+
+  pre { margin: 0; }
+  .keyword { color: #ff7b72; }
+  .variable { color: #d2a8ff; }
+  .property { color: #79c0ff; }
+  .string { color: #a5d6ff; }
+
+  /* Experience Cards */
+  .timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .company {
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  
+  .date {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+
+  .tags {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .tags li, .tech-tag {
+    background: rgba(255,255,255,0.05);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Project Cards */
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .project-meta {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    margin-top: auto;
+  }
+
+  .link-arrow {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  /* Profile Image */
+  .relative-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .profile-image {
+    width: 350px;
+    height: 350px;
+    border-radius: 20px;
+    object-fit: cover;
+    z-index: 10;
+    position: relative;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.3);
+    transition: transform 0.3s ease;
+  }
+
+  .profile-image:hover {
+    transform: scale(1.02);
+  }
+
+  .glow-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 360px;
+    height: 360px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, rgba(0, 0, 0, 0) 70%);
+    z-index: 1;
+    filter: blur(20px);
+  }
+
+  /* About Section */
+  .bg-dim {
+    background: rgba(15, 23, 42, 0.3);
+  }
+
+  .about-wrapper {
+    align-items: flex-start;
+  }
+
+  .about-text p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  .objective-card {
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+    border: 1px solid rgba(139, 92, 246, 0.2);
+  }
+
+  .stat-row {
+    display: flex;
+    gap: 3rem;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat .number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .stat .label {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 768px) {
+    .mobile-reverse {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    
+    .hero-section {
+        text-align: center;
+        padding-top: 80px;
+    }
+    
+    .cta-group {
+        justify-content: center;
+    }
+
+    .profile-image {
+      width: 280px;
+      height: 280px;
+    }
+    
+    .glow-effect {
+      width: 290px;
+      height: 290px;
+    }
+  }
+</style>
