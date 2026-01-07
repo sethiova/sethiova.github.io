@@ -82,6 +82,121 @@ const t = navTranslations[lang];
         <p>&copy; {new Date().getFullYear()} Max Dev. {lang === 'es' ? 'Hecho con Astro' : 'Made with Astro'} 🚀.</p>
       </div>
     </footer>
+    <!-- Lightbox Structure -->
+    <div id="lightbox" class="lightbox">
+      <span class="lightbox-close">&times;</span>
+      <span class="lightbox-prev">&#10094;</span>
+      <img class="lightbox-content" id="lightbox-img" src="" alt="Zoomed Image">
+      <span class="lightbox-next">&#10095;</span>
+    </div>
+
+    <script is:inline>
+      document.addEventListener('astro:page-load', () => {
+        initLightbox();
+      });
+
+      // Fallback for initial load if view transitions aren't used or behave differently
+      document.addEventListener('DOMContentLoaded', () => {
+        initLightbox();
+      });
+
+      function initLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.querySelector('.lightbox-close');
+        const prevBtn = document.querySelector('.lightbox-prev');
+        const nextBtn = document.querySelector('.lightbox-next');
+        let currentGalleryImages = [];
+        let currentIndex = 0;
+
+        // Open Lightbox
+        document.querySelectorAll('.project-img').forEach(img => {
+          img.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent bubbling if needed
+            const gallery = img.closest('.image-gallery');
+            
+            if (gallery) {
+              currentGalleryImages = Array.from(gallery.querySelectorAll('.project-img'));
+              currentIndex = currentGalleryImages.indexOf(img);
+            } else {
+              // Standalone image (fallback)
+              currentGalleryImages = [img];
+              currentIndex = 0;
+            }
+
+            updateLightboxImage();
+            lightbox.classList.add('active');
+            updateNavButtons();
+          });
+        });
+
+        // Close Lightbox
+        function closeLightbox() {
+          lightbox.classList.remove('active');
+          currentGalleryImages = []; // Reset
+        }
+
+        closeBtn.addEventListener('click', closeLightbox);
+        
+        lightbox.addEventListener('click', (e) => {
+          if (e.target === lightbox) {
+            closeLightbox();
+          }
+        });
+
+        // Navigation
+        function updateLightboxImage() {
+          if (currentGalleryImages.length > 0) {
+            const currentImg = currentGalleryImages[currentIndex];
+            lightboxImg.src = currentImg.src;
+            lightboxImg.alt = currentImg.alt;
+          }
+        }
+
+        function updateNavButtons() {
+          if (currentGalleryImages.length <= 1) {
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+          } else {
+            prevBtn.style.display = 'block';
+            nextBtn.style.display = 'block';
+          }
+        }
+
+        function showNext() {
+          if (currentGalleryImages.length > 1) {
+            currentIndex = (currentIndex + 1) % currentGalleryImages.length;
+            updateLightboxImage();
+          }
+        }
+
+        function showPrev() {
+          if (currentGalleryImages.length > 1) {
+            currentIndex = (currentIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+            updateLightboxImage();
+          }
+        }
+
+        nextBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          showNext();
+        });
+
+        prevBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          showPrev();
+        });
+
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+          if (!lightbox.classList.contains('active')) return;
+          
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowRight') showNext();
+          if (e.key === 'ArrowLeft') showPrev();
+        });
+      }
+    </script>
   </body>
 </html>
 
