@@ -132,13 +132,23 @@ const t = navTranslations[lang];
           prevBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            gallery.scrollBy({ left: -gallery.clientWidth, behavior: 'smooth' });
+            if (gallery.scrollLeft <= 5) {
+               // Cycle to end
+               gallery.scrollTo({ left: gallery.scrollWidth, behavior: 'smooth' });
+            } else {
+               gallery.scrollBy({ left: -gallery.clientWidth, behavior: 'smooth' });
+            }
           });
 
           nextBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            gallery.scrollBy({ left: gallery.clientWidth, behavior: 'smooth' });
+            if (gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 5) {
+               // Cycle to start
+               gallery.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+               gallery.scrollBy({ left: gallery.clientWidth, behavior: 'smooth' });
+            }
           });
 
           wrapper.appendChild(prevBtn);
