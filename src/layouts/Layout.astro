@@ -4,13 +4,31 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  lang?: 'es' | 'en';
 }
 
-const { title, description = "Max Dev Portfolio - Estudiante UCS & Becario IT en ISAOSA" } = Astro.props;
+const { title, description = "Max Dev Portfolio", lang = 'es' } = Astro.props;
+
+const navTranslations = {
+  es: {
+    about: 'Sobre mí',
+    experience: 'Experiencia',
+    projects: 'Proyectos',
+    contact: 'Contactar'
+  },
+  en: {
+    about: 'About',
+    experience: 'Experience',
+    projects: 'Projects',
+    contact: 'Contact'
+  }
+};
+
+const t = navTranslations[lang];
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -27,11 +45,32 @@ const { title, description = "Max Dev Portfolio - Estudiante UCS & Becario IT en
       <div class="container nav-content">
         <a href="#" class="logo">Max<span class="text-gradient">.Dev</span></a>
         <ul class="nav-links">
-          <li><a href="#about">Sobre mí</a></li>
-          <li><a href="#experience">Experiencia</a></li>
-          <li><a href="#projects">Proyectos</a></li>
-          <li><a href="https://www.linkedin.com/" target="_blank">LinkedIn</a></li>
-          <li><a href="#contact" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Contactar</a></li>
+          <li><a href="#about">{t.about}</a></li>
+          <li><a href="#experience">{t.experience}</a></li>
+          <li><a href="#projects">{t.projects}</a></li>
+          
+          <!-- Social Links -->
+          <li class="social-links-nav">
+             <a href="https://github.com/sethiova" target="_blank" aria-label="GitHub">GitHub</a>
+             <span class="separator">/</span>
+             <a href="https://www.linkedin.com/in/maximiliano-mendoza-dev/" target="_blank" aria-label="LinkedIn">LinkedIn</a>
+          </li>
+          
+          <!-- Controls -->
+          <li class="controls-group">
+            <!-- Theme Toggle -->
+            <button id="theme-toggle" class="control-btn" aria-label="Cambiar Tema" title="Cambiar Tema">
+              <span id="theme-icon">🎨</span>
+              <span class="tooltip">Original</span>
+            </button>
+
+            <!-- Language Toggle -->
+            <button id="lang-toggle" class="control-btn" aria-label="Cambiar Idioma" title="Switch Language">
+              <span id="lang-text">{lang.toUpperCase()}</span>
+            </button>
+          </li>
+
+          <li><a href="#contact" class="btn btn-primary contact-btn">{t.contact}</a></li>
         </ul>
       </div>
     </nav>
@@ -40,7 +79,7 @@ const { title, description = "Max Dev Portfolio - Estudiante UCS & Becario IT en
 
     <footer class="footer">
       <div class="container">
-        <p>&copy; {new Date().getFullYear()} Max Dev. Hecho con Astro 🚀.</p>
+        <p>&copy; {new Date().getFullYear()} Max Dev. {lang === 'es' ? 'Hecho con Astro' : 'Made with Astro'} 🚀.</p>
       </div>
     </footer>
   </body>
@@ -76,10 +115,12 @@ const { title, description = "Max Dev Portfolio - Estudiante UCS & Becario IT en
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(15, 23, 42, 0.8);
-    backdrop-filter: blur(10px);
+    background: var(--nav-bg); 
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     z-index: 1000;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid var(--glass-border);
+    transition: background 0.3s ease;
   }
 
   .nav-content {
@@ -98,7 +139,7 @@ const { title, description = "Max Dev Portfolio - Estudiante UCS & Becario IT en
   .nav-links {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 1.5rem;
     align-items: center;
     padding: 0;
     margin: 0;
@@ -107,10 +148,87 @@ const { title, description = "Max Dev Portfolio - Estudiante UCS & Becario IT en
   .nav-links a:not(.btn) {
     color: var(--color-text-muted);
     font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s;
   }
 
   .nav-links a:not(.btn):hover {
+    color: var(--color-primary);
+  }
+
+  .social-links-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-right: 0.5rem;
+    border-left: 1px solid rgba(255,255,255,0.1);
+    padding-left: 1.5rem;
+  }
+
+  .separator {
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+  }
+
+  /* Controls (Theme & Lang) */
+  .controls-group {
+    display: flex;
+    gap: 0.8rem;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.3rem 0.6rem;
+    border-radius: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .control-btn {
+    background: transparent;
+    border: none;
     color: var(--color-text-main);
+    padding: 0.4rem;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 36px;
+    height: 36px;
+    position: relative;
+  }
+
+  .control-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-primary);
+    transform: rotate(15deg);
+  }
+
+  .control-btn .tooltip {
+    position: absolute;
+    top: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-surface);
+    color: var(--color-text-main);
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.3rem;
+    font-size: 0.75rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    border: 1px solid var(--glass-border);
+    white-space: nowrap;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  .control-btn:hover .tooltip {
+    opacity: 1;
+  }
+
+  .contact-btn {
+    padding: 0.5rem 1.2rem; 
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
   }
 
   /* Footer */
@@ -120,4 +238,81 @@ const { title, description = "Max Dev Portfolio - Estudiante UCS & Becario IT en
     margin-top: auto;
     border-top: 1px solid rgba(255,255,255,0.05);
   }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .nav-links {
+        gap: 0.8rem;
+    }
+    .social-links-nav, .separator {
+        display: none; /* Hide social text links on mobile to save space */
+    }
+    .controls-group {
+        padding: 0.2rem;
+    }
+  }
 </style>
+
+<script>
+  // Elements
+  const themeBtn = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const themeTooltip = themeBtn?.querySelector('.tooltip');
+  
+  // Config
+  const themes = [
+    { name: 'original', icon: '🎨', label: 'Original' }, 
+    { name: 'light', icon: '☀️', label: 'Light' }, 
+    { name: 'dark', icon: '🌙', label: 'Dark' }
+  ];
+  
+  let currentThemeIndex = 0;
+
+  // Initialize
+  function updateThemeUI(index) {
+    const theme = themes[index];
+    
+    // Set Attribute
+    if (theme.name === 'original') {
+      document.documentElement.removeAttribute('data-theme');
+    } else {
+      document.documentElement.setAttribute('data-theme', theme.name);
+    }
+
+    // Update Icon & Label
+    if (themeIcon) themeIcon.textContent = theme.icon;
+    if (themeTooltip) themeTooltip.textContent = theme.label;
+  }
+
+  // Load saved theme
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    const savedIndex = themes.findIndex(t => t.name === savedTheme);
+    if (savedIndex !== -1) {
+        currentThemeIndex = savedIndex;
+        updateThemeUI(currentThemeIndex);
+    }
+  }
+
+  // Event Listener Theme
+  themeBtn?.addEventListener('click', () => {
+    currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+    const newTheme = themes[currentThemeIndex];
+    updateThemeUI(currentThemeIndex);
+    localStorage.setItem('theme', newTheme.name);
+  });
+
+  // Language Logic is simpler: just redirect
+  const langBtn = document.getElementById('lang-toggle');
+  
+  langBtn?.addEventListener('click', () => {
+    const currentPath = window.location.pathname;
+    if (currentPath.startsWith('/en')) {
+      const newPath = currentPath.replace('/en', '') || '/';
+      window.location.href = newPath;
+    } else {
+      const newPath = '/en' + (currentPath === '/' ? '' : currentPath);
+      window.location.href = newPath;
+    }
+  });
+</script>

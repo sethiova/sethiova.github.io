@@ -28,6 +28,51 @@
     --glass-bg: rgba(30, 41, 59, 0.7);
     --glass-border: rgba(255, 255, 255, 0.1);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+
+    /* Nav Specific */
+    --nav-bg: rgba(15, 23, 42, 0.7);
+}
+
+[data-theme="light"] {
+    --color-bg: #f8fafc;
+    /* Slate 50 */
+    --color-surface: #ffffff;
+    /* White */
+    --color-primary: #6366f1;
+    /* Indigo 500 */
+    --color-secondary: #ec4899;
+    /* Pink 500 */
+    --color-text-main: #111827;
+    /* Gray 900 - Almost Black */
+    --color-text-muted: #4b5563;
+    /* Gray 600 - Darker gray */
+    --glass-bg: rgba(255, 255, 255, 0.9);
+    /* Very opaque white for cards */
+    --glass-border: rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+    /* Nav Specific */
+    --nav-bg: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="dark"] {
+    --color-bg: #000000;
+    /* Pure Black */
+    --color-surface: #121212;
+    /* Dark Gray */
+    --color-primary: #3b82f6;
+    /* Blue 500 */
+    --color-secondary: #10b981;
+    /* Emerald 500 */
+    --color-text-main: #f3f4f6;
+    /* Gray 100 */
+    --color-text-muted: #9ca3af;
+    /* Gray 400 */
+    --glass-bg: rgba(18, 18, 18, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.1);
+
+    /* Nav Specific */
+    --nav-bg: rgba(18, 18, 18, 0.8);
 }
 
 html {
@@ -132,10 +177,31 @@ a:hover {
     padding: 4rem 0;
 }
 
+
 .text-gradient {
     background: var(--gradient-main);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+/* Background Utility */
+.bg-dim {
+    background-color: rgba(0, 0, 0, 0.02);
+    /* Very subtle dim for sections */
+}
+
+/* Ensure headings inside cards have correct color */
+.glass-card h3,
+.glass-card p {
+    color: inherit;
+}
+
+.glass-card h3 {
+    color: var(--color-text-main);
+}
+
+.glass-card p {
+    color: var(--color-text-muted);
 }
 
 /* Cards */
@@ -157,6 +223,14 @@ a:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-lg);
     border-color: var(--color-primary);
+}
+
+.project-year {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
 }
 
 /* Buttons */
