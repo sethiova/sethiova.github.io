@@ -318,3 +318,33 @@ a:hover {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+/* Gallery Styles - Imported from new requirement */
+.image-gallery {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    scrollbar-width: none;
+}
+
+.image-gallery::-webkit-scrollbar {
+    display: none;
+}
+
+.project-img {
+    width: 100%;
+    min-width: 100%;
+    scroll-snap-align: center;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.glass-card:hover .project-img {
+    transform: scale(1.02);
+}
