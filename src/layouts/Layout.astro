@@ -101,7 +101,13 @@ const t = navTranslations[lang];
         initGalleryNav();
       });
 
+      let activeGalleryIntervals = [];
+
       function initGalleryNav() {
+        // Cleanup old intervals on re-run
+        activeGalleryIntervals.forEach(clearInterval);
+        activeGalleryIntervals = [];
+
         document.querySelectorAll('.image-gallery').forEach(gallery => {
           // Check if already wrapped to prevent duplicate wrapping on re-renders
           if (gallery.parentElement.classList.contains('gallery-wrapper')) return;
@@ -133,7 +139,6 @@ const t = navTranslations[lang];
             e.preventDefault();
             e.stopPropagation();
             if (gallery.scrollLeft <= 20) {
-               // Cycle to end instantly (no rewind anim)
                gallery.scrollTo({ left: gallery.scrollWidth, behavior: 'auto' });
             } else {
                gallery.scrollBy({ left: -gallery.clientWidth, behavior: 'smooth' });
@@ -144,7 +149,6 @@ const t = navTranslations[lang];
             e.preventDefault();
             e.stopPropagation();
             if (gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 20) {
-               // Cycle to start instantly
                gallery.scrollTo({ left: 0, behavior: 'auto' });
             } else {
                gallery.scrollBy({ left: gallery.clientWidth, behavior: 'smooth' });
@@ -153,6 +157,26 @@ const t = navTranslations[lang];
 
           wrapper.appendChild(prevBtn);
           wrapper.appendChild(nextBtn);
+
+          // Auto Slide Logic
+          let intervalId;
+          const startAutoSlide = () => {
+             clearInterval(intervalId);
+             intervalId = setInterval(() => {
+                 nextBtn.click();
+             }, 5000);
+             activeGalleryIntervals.push(intervalId);
+          };
+
+          const stopAutoSlide = () => {
+             clearInterval(intervalId);
+          };
+
+          wrapper.addEventListener('mouseenter', stopAutoSlide);
+          wrapper.addEventListener('mouseleave', startAutoSlide);
+          
+          // Initial start
+          startAutoSlide();
         });
       }
 
