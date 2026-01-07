@@ -93,12 +93,58 @@ const t = navTranslations[lang];
     <script is:inline>
       document.addEventListener('astro:page-load', () => {
         initLightbox();
+        initGalleryNav();
       });
 
-      // Fallback for initial load if view transitions aren't used or behave differently
       document.addEventListener('DOMContentLoaded', () => {
         initLightbox();
+        initGalleryNav();
       });
+
+      function initGalleryNav() {
+        document.querySelectorAll('.image-gallery').forEach(gallery => {
+          // Check if already wrapped to prevent duplicate wrapping on re-renders
+          if (gallery.parentElement.classList.contains('gallery-wrapper')) return;
+
+          const images = gallery.querySelectorAll('img');
+          if (images.length <= 1) return; // No need for nav if simple image
+
+          // Create wrapper
+          const wrapper = document.createElement('div');
+          wrapper.classList.add('gallery-wrapper');
+          
+          // Insert wrapper before gallery
+          gallery.parentNode.insertBefore(wrapper, gallery);
+          
+          // Move gallery into wrapper
+          wrapper.appendChild(gallery);
+
+          // Create Buttons
+          const prevBtn = document.createElement('button');
+          prevBtn.innerHTML = '&#10094;';
+          prevBtn.classList.add('gallery-nav-btn', 'gallery-prev-btn');
+
+          const nextBtn = document.createElement('button');
+          nextBtn.innerHTML = '&#10095;';
+          nextBtn.classList.add('gallery-nav-btn', 'gallery-next-btn');
+
+          // Add events
+          prevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            gallery.scrollBy({ left: -gallery.clientWidth, behavior: 'smooth' });
+          });
+
+          nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            gallery.scrollBy({ left: gallery.clientWidth, behavior: 'smooth' });
+          });
+
+          wrapper.appendChild(prevBtn);
+          wrapper.appendChild(nextBtn);
+        });
+      }
 
       function initLightbox() {
         const lightbox = document.getElementById('lightbox');
@@ -111,15 +157,21 @@ const t = navTranslations[lang];
 
         // Open Lightbox
         document.querySelectorAll('.project-img').forEach(img => {
+          // Remove old listeners to avoid duplicates if re-init? 
+          // Better: check if listener attached? Hard to do.
+          // Native 'click' duplicates are fine if functions are identical? No.
+          // Workaround: cloning node or simple flag.
+          if (img.dataset.lightboxAttached) return;
+          img.dataset.lightboxAttached = "true";
+
           img.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent bubbling if needed
+            e.stopPropagation(); 
             const gallery = img.closest('.image-gallery');
             
             if (gallery) {
               currentGalleryImages = Array.from(gallery.querySelectorAll('.project-img'));
               currentIndex = currentGalleryImages.indexOf(img);
             } else {
-              // Standalone image (fallback)
               currentGalleryImages = [img];
               currentIndex = 0;
             }

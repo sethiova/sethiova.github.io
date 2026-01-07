@@ -346,9 +346,56 @@ a:hover {
 }
 
 
+
 .glass-card:hover .project-img {
     transform: scale(1.02);
 }
+
+/* In-Card Gallery Navigation */
+.gallery-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    /* Ensure arrows don't cause scrollbars */
+    border-radius: 0.5rem;
+}
+
+.gallery-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s, background 0.3s;
+    font-size: 14px;
+}
+
+.gallery-wrapper:hover .gallery-nav-btn {
+    opacity: 1;
+}
+
+.gallery-nav-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.gallery-prev-btn {
+    left: 10px;
+}
+
+.gallery-next-btn {
+    right: 10px;
+}
+
 
 /* Lightbox Styles */
 .lightbox {
