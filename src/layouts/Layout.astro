@@ -132,9 +132,9 @@ const t = navTranslations[lang];
           prevBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            if (gallery.scrollLeft <= 5) {
-               // Cycle to end
-               gallery.scrollTo({ left: gallery.scrollWidth, behavior: 'smooth' });
+            if (gallery.scrollLeft <= 20) {
+               // Cycle to end instantly (no rewind anim)
+               gallery.scrollTo({ left: gallery.scrollWidth, behavior: 'auto' });
             } else {
                gallery.scrollBy({ left: -gallery.clientWidth, behavior: 'smooth' });
             }
@@ -143,9 +143,9 @@ const t = navTranslations[lang];
           nextBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            if (gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 5) {
-               // Cycle to start
-               gallery.scrollTo({ left: 0, behavior: 'smooth' });
+            if (gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 20) {
+               // Cycle to start instantly
+               gallery.scrollTo({ left: 0, behavior: 'auto' });
             } else {
                gallery.scrollBy({ left: gallery.clientWidth, behavior: 'smooth' });
             }
