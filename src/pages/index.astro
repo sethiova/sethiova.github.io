@@ -111,9 +111,52 @@ import Layout from '../layouts/Layout.astro';
         <p>Una selección de mis proyectos en GitHub.</p>
         
         <div class="grid-3">
-          <!-- Proyecto 1 -->
+          <!-- Proyecto 1: Inzure -->
           <article class="glass-card project-card">
             <div class="project-content">
+              <img src="/p_inzure.png" alt="Inzure App" class="project-img" />
+              <h3>Inzure</h3>
+              <p>App móvil para la gestión de seguros (autos, personales, empresariales) con recomendaciones personalizadas, chat con proveedores y diseño minimalista.</p>
+              <div class="project-meta">
+                <span class="tech-tag">Kotlin</span>
+                <span class="tech-tag">Mobile</span>
+              </div>
+              <a href="https://github.com/hectordani03/Inzure" target="_blank" class="link-arrow">Ver en GitHub &rarr;</a>
+            </div>
+          </article>
+
+          <!-- Proyecto 2: PI3-WEBGESTION -->
+          <article class="glass-card project-card">
+            <div class="project-content">
+               <img src="/p_webgestion.png" alt="PI3 Web Gestion" class="project-img" />
+               <h3>PI3 WEBGESTION</h3>
+               <p>Sistema web administrativo integral para gestión de datos, diseñado con estructuras HTML sólidas y enfoques modernos de desarrollo web.</p>
+               <div class="project-meta">
+                 <span class="tech-tag">HTML</span>
+                 <span class="tech-tag">Web Desing</span>
+               </div>
+               <a href="https://github.com/AngelDiaz591/PI3-WEBGESTION" target="_blank" class="link-arrow">Ver en GitHub &rarr;</a>
+             </div>
+          </article>
+
+          <!-- Proyecto 3: PI4_Foro_Web -->
+           <article class="glass-card project-card">
+             <div class="project-content">
+               <img src="/p_foro.png" alt="Foro Web" class="project-img" />
+               <h3>PI4 Foro Web</h3>
+               <p>Plataforma interactiva de foros con gestión de usuarios, hilos de discusión y moderación, desarrollado con lógica de servidor robusta.</p>
+               <div class="project-meta">
+                 <span class="tech-tag">PHP</span>
+                 <span class="tech-tag">Backend</span>
+               </div>
+               <a href="https://github.com/AngelDiaz591/PI4_Foro_Web" target="_blank" class="link-arrow">Ver en GitHub &rarr;</a>
+             </div>
+          </article>
+      
+          <!-- Proyecto 4: AR Light Switch -->
+          <article class="glass-card project-card">
+            <div class="project-content">
+              <img src="/p_ar.png" alt="AR Unity App" class="project-img" />
               <h3>AR Light Switch Unity</h3>
               <p>Simulador AR en Unity para aprender circuitos eléctricos residenciales (sencillos y de escalera). Visualización 3D e interacción en tiempo real.</p>
               <div class="project-meta">
@@ -125,44 +168,31 @@ import Layout from '../layouts/Layout.astro';
             </div>
           </article>
 
-          <!-- Proyecto 2 -->
+          <!-- Proyecto 5: NauticStockFork -->
           <article class="glass-card project-card">
             <div class="project-content">
-              <h3>Seguros App</h3>
-              <p>App móvil para gestión de seguros (autos, personales, empresariales) con recomendaciones personalizadas y chat con proveedores.</p>
+              <img src="/p_nautic.png" alt="Nautic Stock" class="project-img" />
+              <h3>NauticStockFork</h3>
+              <p>Sistema de inventario y gestión de stock náutico. Dashboard optimizado para el control eficiente de recursos marítimos.</p>
               <div class="project-meta">
-                <span class="tech-tag">Mobile App</span>
-                <span class="tech-tag">UX/UI</span>
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">Frontend</span>
               </div>
-              <a href="https://github.com/sethiova/Seguros-App" target="_blank" class="link-arrow">Ver en GitHub &rarr;</a>
+              <a href="https://github.com/sethiova/NauticStockFork" target="_blank" class="link-arrow">Ver en GitHub &rarr;</a>
             </div>
           </article>
 
-          <!-- Proyecto 3 -->
-           <article class="glass-card project-card">
-            <div class="project-content">
-              <h3>API & Bases de Datos</h3>
-              <p>Sistema backend enfocado en el manejo avanzado de datos mediante APIs REST y Procedimientos Almacenados complejos.</p>
-              <div class="project-meta">
-                <span class="tech-tag">SQL</span>
-                <span class="tech-tag">API Design</span>
-                <span class="tech-tag">Backend</span>
-              </div>
-              <a href="https://github.com/sethiova/Practica-API-Bases-de-Datos-Avanzadas" target="_blank" class="link-arrow">Ver en GitHub &rarr;</a>
-            </div>
-          </article>
-      
-          <!-- Proyecto 4 -->
+          <!-- Proyecto 6: Portfolio -->
           <article class="glass-card project-card">
             <div class="project-content">
-              <h3>Python Math Solver</h3>
-              <p>Herramienta computacional para resolver problemas de programación lineal (Simplex, Gran M, Dos Fases) con cálculos automatizados.</p>
+              <img src="/p_portfolio.png" alt="Portfolio Max Dev" class="project-img" />
+              <h3>Max Dev Portfolio</h3>
+              <p>Este portafolio web personal, optimizado para alto rendimiento y despliegue continuo con GitHub Actions.</p>
               <div class="project-meta">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">Algorithms</span>
-                <span class="tech-tag">Math</span>
+                <span class="tech-tag">Astro</span>
+                <span class="tech-tag">GitHub Actions</span>
               </div>
-              <a href="https://github.com/sethiova/ExamTeamPI5" target="_blank" class="link-arrow">Ver en GitHub &rarr;</a>
+              <a href="https://github.com/sethiova/sethiova.github.io" target="_blank" class="link-arrow">Ver en GitHub &rarr;</a>
             </div>
           </article>
         </div>
@@ -417,5 +447,20 @@ import Layout from '../layouts/Layout.astro';
       width: 290px;
       height: 290px;
     }
+  }
+
+  /* Project Images */
+  .project-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease;
+  }
+
+  .glass-card:hover .project-img {
+    transform: scale(1.02);
   }
 </style>
