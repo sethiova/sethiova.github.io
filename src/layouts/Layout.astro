@@ -1,27 +1,27 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
 
 interface Props {
   title: string;
   description?: string;
-  lang?: 'es' | 'en';
+  lang?: "es" | "en";
 }
 
-const { title, description = "Max Dev Portfolio", lang = 'es' } = Astro.props;
+const { title, description = "Max Dev Portfolio", lang = "es" } = Astro.props;
 
 const navTranslations = {
   es: {
-    about: 'Sobre mí',
-    experience: 'Experiencia',
-    projects: 'Proyectos',
-    contact: 'Contactar'
+    about: "Sobre mí",
+    experience: "Experiencia",
+    projects: "Proyectos",
+    contact: "Contactar",
   },
   en: {
-    about: 'About',
-    experience: 'Experience',
-    projects: 'Projects',
-    contact: 'Contact'
-  }
+    about: "About",
+    experience: "Experience",
+    projects: "Projects",
+    contact: "Contact",
+  },
 };
 
 const t = navTranslations[lang];
@@ -40,37 +40,66 @@ const t = navTranslations[lang];
   <body>
     <div class="background-glow"></div>
     <div class="background-glow-2"></div>
-    
+
     <nav class="navbar">
       <div class="container nav-content">
         <a href="#" class="logo">Max<span class="text-gradient">.Dev</span></a>
+
+        <button class="hamburger" aria-label="Menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+
         <ul class="nav-links">
           <li><a href="#about">{t.about}</a></li>
           <li><a href="#experience">{t.experience}</a></li>
           <li><a href="#projects">{t.projects}</a></li>
-          
+
           <!-- Social Links -->
           <li class="social-links-nav">
-             <a href="https://github.com/sethiova" target="_blank" aria-label="GitHub">GitHub</a>
-             <span class="separator">/</span>
-             <a href="https://www.linkedin.com/in/maximiliano-mendoza-dev/" target="_blank" aria-label="LinkedIn">LinkedIn</a>
+            <a
+              href="https://github.com/sethiova"
+              target="_blank"
+              aria-label="GitHub">GitHub</a
+            >
+            <span class="separator">/</span>
+            <a
+              href="https://www.linkedin.com/in/maximiliano-mendoza-dev/"
+              target="_blank"
+              aria-label="LinkedIn">LinkedIn</a
+            >
           </li>
-          
+
           <!-- Controls -->
           <li class="controls-group">
             <!-- Theme Toggle -->
-            <button id="theme-toggle" class="control-btn" aria-label="Cambiar Tema" title="Cambiar Tema">
+            <button
+              id="theme-toggle"
+              class="control-btn"
+              aria-label="Cambiar Tema"
+              title="Cambiar Tema"
+            >
               <span id="theme-icon">🎨</span>
               <span class="tooltip">Original</span>
             </button>
 
             <!-- Language Toggle -->
-            <button id="lang-toggle" class="control-btn" aria-label="Cambiar Idioma" title="Switch Language">
+            <button
+              id="lang-toggle"
+              class="control-btn"
+              aria-label="Cambiar Idioma"
+              title="Switch Language"
+            >
               <span id="lang-text">{lang.toUpperCase()}</span>
             </button>
           </li>
 
-          <li><a href="#contact" class="btn btn-primary contact-btn">{t.contact}</a></li>
+          <li>
+            <a href="#contact" class="btn btn-primary contact-btn"
+              >{t.contact}</a
+            >
+          </li>
         </ul>
       </div>
     </nav>
@@ -79,27 +108,69 @@ const t = navTranslations[lang];
 
     <footer class="footer">
       <div class="container">
-        <p>&copy; {new Date().getFullYear()} Max Dev. {lang === 'es' ? 'Hecho con Astro' : 'Made with Astro'} 🚀.</p>
+        <p>
+          &copy; {new Date().getFullYear()} Max Dev. {
+            lang === "es" ? "Hecho con Astro" : "Made with Astro"
+          } 🚀.
+        </p>
       </div>
     </footer>
     <!-- Lightbox Structure -->
     <div id="lightbox" class="lightbox">
       <span class="lightbox-close">&times;</span>
       <span class="lightbox-prev">&#10094;</span>
-      <img class="lightbox-content" id="lightbox-img" src="" alt="Zoomed Image">
+      <img
+        class="lightbox-content"
+        id="lightbox-img"
+        src=""
+        alt="Zoomed Image"
+      />
       <span class="lightbox-next">&#10095;</span>
     </div>
 
     <script is:inline>
-      document.addEventListener('astro:page-load', () => {
+      document.addEventListener("astro:page-load", () => {
         initLightbox();
         initGalleryNav();
+        initMobileMenu();
       });
 
-      document.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener("DOMContentLoaded", () => {
         initLightbox();
         initGalleryNav();
+        initMobileMenu();
       });
+
+      function initMobileMenu() {
+        const hamburger = document.querySelector(".hamburger");
+        const navLinks = document.querySelector(".nav-links");
+
+        if (hamburger && navLinks) {
+          hamburger.onclick = (e) => {
+            e.stopPropagation();
+            hamburger.classList.toggle("active");
+            navLinks.classList.toggle("active");
+          };
+
+          navLinks.querySelectorAll("a").forEach((link) => {
+            link.onclick = () => {
+              hamburger.classList.remove("active");
+              navLinks.classList.remove("active");
+            };
+          });
+
+          document.onclick = (e) => {
+            if (
+              hamburger.classList.contains("active") &&
+              !hamburger.contains(e.target) &&
+              !navLinks.contains(e.target)
+            ) {
+              hamburger.classList.remove("active");
+              navLinks.classList.remove("active");
+            }
+          };
+        }
+      }
 
       let activeGalleryIntervals = [];
 
@@ -108,50 +179,60 @@ const t = navTranslations[lang];
         activeGalleryIntervals.forEach(clearInterval);
         activeGalleryIntervals = [];
 
-        document.querySelectorAll('.image-gallery').forEach(gallery => {
+        document.querySelectorAll(".image-gallery").forEach((gallery) => {
           // Check if already wrapped to prevent duplicate wrapping on re-renders
-          if (gallery.parentElement.classList.contains('gallery-wrapper')) return;
+          if (gallery.parentElement.classList.contains("gallery-wrapper"))
+            return;
 
-          const images = gallery.querySelectorAll('img');
+          const images = gallery.querySelectorAll("img");
           if (images.length <= 1) return; // No need for nav if simple image
 
           // Create wrapper
-          const wrapper = document.createElement('div');
-          wrapper.classList.add('gallery-wrapper');
-          
+          const wrapper = document.createElement("div");
+          wrapper.classList.add("gallery-wrapper");
+
           // Insert wrapper before gallery
           gallery.parentNode.insertBefore(wrapper, gallery);
-          
+
           // Move gallery into wrapper
           wrapper.appendChild(gallery);
 
           // Create Buttons
-          const prevBtn = document.createElement('button');
-          prevBtn.innerHTML = '&#10094;';
-          prevBtn.classList.add('gallery-nav-btn', 'gallery-prev-btn');
+          const prevBtn = document.createElement("button");
+          prevBtn.innerHTML = "&#10094;";
+          prevBtn.classList.add("gallery-nav-btn", "gallery-prev-btn");
 
-          const nextBtn = document.createElement('button');
-          nextBtn.innerHTML = '&#10095;';
-          nextBtn.classList.add('gallery-nav-btn', 'gallery-next-btn');
+          const nextBtn = document.createElement("button");
+          nextBtn.innerHTML = "&#10095;";
+          nextBtn.classList.add("gallery-nav-btn", "gallery-next-btn");
 
           // Add events
-          prevBtn.addEventListener('click', (e) => {
+          prevBtn.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
             if (gallery.scrollLeft <= 20) {
-               gallery.scrollTo({ left: gallery.scrollWidth, behavior: 'auto' });
+              gallery.scrollTo({ left: gallery.scrollWidth, behavior: "auto" });
             } else {
-               gallery.scrollBy({ left: -gallery.clientWidth, behavior: 'smooth' });
+              gallery.scrollBy({
+                left: -gallery.clientWidth,
+                behavior: "smooth",
+              });
             }
           });
 
-          nextBtn.addEventListener('click', (e) => {
+          nextBtn.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
-            if (gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 20) {
-               gallery.scrollTo({ left: 0, behavior: 'auto' });
+            if (
+              gallery.scrollLeft + gallery.clientWidth >=
+              gallery.scrollWidth - 20
+            ) {
+              gallery.scrollTo({ left: 0, behavior: "auto" });
             } else {
-               gallery.scrollBy({ left: gallery.clientWidth, behavior: 'smooth' });
+              gallery.scrollBy({
+                left: gallery.clientWidth,
+                behavior: "smooth",
+              });
             }
           });
 
@@ -161,49 +242,51 @@ const t = navTranslations[lang];
           // Auto Slide Logic
           let intervalId;
           const startAutoSlide = () => {
-             clearInterval(intervalId);
-             intervalId = setInterval(() => {
-                 nextBtn.click();
-             }, 10000);
-             activeGalleryIntervals.push(intervalId);
+            clearInterval(intervalId);
+            intervalId = setInterval(() => {
+              nextBtn.click();
+            }, 10000);
+            activeGalleryIntervals.push(intervalId);
           };
 
           const stopAutoSlide = () => {
-             clearInterval(intervalId);
+            clearInterval(intervalId);
           };
 
-          wrapper.addEventListener('mouseenter', stopAutoSlide);
-          wrapper.addEventListener('mouseleave', startAutoSlide);
-          
+          wrapper.addEventListener("mouseenter", stopAutoSlide);
+          wrapper.addEventListener("mouseleave", startAutoSlide);
+
           // Initial start
           startAutoSlide();
         });
       }
 
       function initLightbox() {
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const closeBtn = document.querySelector('.lightbox-close');
-        const prevBtn = document.querySelector('.lightbox-prev');
-        const nextBtn = document.querySelector('.lightbox-next');
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        const closeBtn = document.querySelector(".lightbox-close");
+        const prevBtn = document.querySelector(".lightbox-prev");
+        const nextBtn = document.querySelector(".lightbox-next");
         let currentGalleryImages = [];
         let currentIndex = 0;
 
         // Open Lightbox
-        document.querySelectorAll('.project-img').forEach(img => {
-          // Remove old listeners to avoid duplicates if re-init? 
+        document.querySelectorAll(".project-img").forEach((img) => {
+          // Remove old listeners to avoid duplicates if re-init?
           // Better: check if listener attached? Hard to do.
           // Native 'click' duplicates are fine if functions are identical? No.
           // Workaround: cloning node or simple flag.
           if (img.dataset.lightboxAttached) return;
           img.dataset.lightboxAttached = "true";
 
-          img.addEventListener('click', (e) => {
-            e.stopPropagation(); 
-            const gallery = img.closest('.image-gallery');
-            
+          img.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const gallery = img.closest(".image-gallery");
+
             if (gallery) {
-              currentGalleryImages = Array.from(gallery.querySelectorAll('.project-img'));
+              currentGalleryImages = Array.from(
+                gallery.querySelectorAll(".project-img"),
+              );
               currentIndex = currentGalleryImages.indexOf(img);
             } else {
               currentGalleryImages = [img];
@@ -211,20 +294,20 @@ const t = navTranslations[lang];
             }
 
             updateLightboxImage();
-            lightbox.classList.add('active');
+            lightbox.classList.add("active");
             updateNavButtons();
           });
         });
 
         // Close Lightbox
         function closeLightbox() {
-          lightbox.classList.remove('active');
+          lightbox.classList.remove("active");
           currentGalleryImages = []; // Reset
         }
 
-        closeBtn.addEventListener('click', closeLightbox);
-        
-        lightbox.addEventListener('click', (e) => {
+        closeBtn.addEventListener("click", closeLightbox);
+
+        lightbox.addEventListener("click", (e) => {
           if (e.target === lightbox) {
             closeLightbox();
           }
@@ -241,11 +324,11 @@ const t = navTranslations[lang];
 
         function updateNavButtons() {
           if (currentGalleryImages.length <= 1) {
-            prevBtn.style.display = 'none';
-            nextBtn.style.display = 'none';
+            prevBtn.style.display = "none";
+            nextBtn.style.display = "none";
           } else {
-            prevBtn.style.display = 'block';
-            nextBtn.style.display = 'block';
+            prevBtn.style.display = "block";
+            nextBtn.style.display = "block";
           }
         }
 
@@ -258,28 +341,30 @@ const t = navTranslations[lang];
 
         function showPrev() {
           if (currentGalleryImages.length > 1) {
-            currentIndex = (currentIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+            currentIndex =
+              (currentIndex - 1 + currentGalleryImages.length) %
+              currentGalleryImages.length;
             updateLightboxImage();
           }
         }
 
-        nextBtn.addEventListener('click', (e) => {
+        nextBtn.addEventListener("click", (e) => {
           e.stopPropagation();
           showNext();
         });
 
-        prevBtn.addEventListener('click', (e) => {
+        prevBtn.addEventListener("click", (e) => {
           e.stopPropagation();
           showPrev();
         });
 
         // Keyboard support
-        document.addEventListener('keydown', (e) => {
-          if (!lightbox.classList.contains('active')) return;
-          
-          if (e.key === 'Escape') closeLightbox();
-          if (e.key === 'ArrowRight') showNext();
-          if (e.key === 'ArrowLeft') showPrev();
+        document.addEventListener("keydown", (e) => {
+          if (!lightbox.classList.contains("active")) return;
+
+          if (e.key === "Escape") closeLightbox();
+          if (e.key === "ArrowRight") showNext();
+          if (e.key === "ArrowLeft") showPrev();
         });
       }
     </script>
@@ -294,18 +379,26 @@ const t = navTranslations[lang];
     left: -20%;
     width: 60%;
     height: 60%;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
+    background: radial-gradient(
+      circle,
+      rgba(139, 92, 246, 0.15) 0%,
+      rgba(15, 23, 42, 0) 70%
+    );
     z-index: -1;
     pointer-events: none;
   }
-  
+
   .background-glow-2 {
     position: fixed;
     bottom: -20%;
     right: -20%;
     width: 60%;
     height: 60%;
-    background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, rgba(15, 23, 42, 0) 70%);
+    background: radial-gradient(
+      circle,
+      rgba(236, 72, 153, 0.1) 0%,
+      rgba(15, 23, 42, 0) 70%
+    );
     z-index: -1;
     pointer-events: none;
   }
@@ -316,7 +409,7 @@ const t = navTranslations[lang];
     top: 0;
     left: 0;
     width: 100%;
-    background: var(--nav-bg); 
+    background: var(--nav-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     z-index: 1000;
@@ -362,7 +455,7 @@ const t = navTranslations[lang];
     align-items: center;
     gap: 0.5rem;
     margin-right: 0.5rem;
-    border-left: 1px solid rgba(255,255,255,0.1);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
     padding-left: 1.5rem;
   }
 
@@ -419,7 +512,7 @@ const t = navTranslations[lang];
     transition: opacity 0.2s;
     border: 1px solid var(--glass-border);
     white-space: nowrap;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
   .control-btn:hover .tooltip {
@@ -427,7 +520,7 @@ const t = navTranslations[lang];
   }
 
   .contact-btn {
-    padding: 0.5rem 1.2rem; 
+    padding: 0.5rem 1.2rem;
     font-size: 0.9rem;
     margin-left: 0.5rem;
   }
@@ -437,47 +530,103 @@ const t = navTranslations[lang];
     padding: 2rem 0;
     text-align: center;
     margin-top: auto;
-    border-top: 1px solid rgba(255,255,255,0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* Hamburger Menu */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    gap: 5px;
+    z-index: 1001;
+  }
+
+  .hamburger .bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-text-main);
+    transition: all 0.3s ease;
+    border-radius: 2px;
+  }
+
+  /* Active Hamburger Animation */
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
   }
 
   /* Responsive Adjustments */
   @media (max-width: 768px) {
+    .hamburger {
+      display: flex;
+    }
+
     .nav-links {
-        gap: 0.8rem;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      width: 100%;
+      background: var(--nav-bg); /* Use var for theme consistency */
+      /* Ensure solid enough bg for readability */
+      background-color: var(--color-bg); /* Fallback/Base */
+      border-bottom: 1px solid var(--glass-border);
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 0;
+      gap: 2rem;
+      transform: translateY(-200%); /* Slide form top */
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 999;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     }
-    .social-links-nav, .separator {
-        display: none; /* Hide social text links on mobile to save space */
+
+    .nav-links.active {
+      transform: translateY(0);
     }
+
+    .social-links-nav,
+    .separator {
+      display: none;
+    }
+
     .controls-group {
-        padding: 0.2rem;
+      margin-top: 1rem;
     }
   }
 </style>
 
 <script>
   // Elements
-  const themeBtn = document.getElementById('theme-toggle');
-  const themeIcon = document.getElementById('theme-icon');
-  const themeTooltip = themeBtn?.querySelector('.tooltip');
-  
+  const themeBtn = document.getElementById("theme-toggle");
+  const themeIcon = document.getElementById("theme-icon");
+  const themeTooltip = themeBtn?.querySelector(".tooltip");
+
   // Config
   const themes = [
-    { name: 'original', icon: '🎨', label: 'Original' }, 
-    { name: 'light', icon: '☀️', label: 'Light' }, 
-    { name: 'dark', icon: '🌙', label: 'Dark' }
+    { name: "original", icon: "🎨", label: "Original" },
+    { name: "light", icon: "☀️", label: "Light" },
+    { name: "dark", icon: "🌙", label: "Dark" },
   ];
-  
+
   let currentThemeIndex = 0;
 
   // Initialize
   function updateThemeUI(index) {
     const theme = themes[index];
-    
+
     // Set Attribute
-    if (theme.name === 'original') {
-      document.documentElement.removeAttribute('data-theme');
+    if (theme.name === "original") {
+      document.documentElement.removeAttribute("data-theme");
     } else {
-      document.documentElement.setAttribute('data-theme', theme.name);
+      document.documentElement.setAttribute("data-theme", theme.name);
     }
 
     // Update Icon & Label
@@ -486,33 +635,33 @@ const t = navTranslations[lang];
   }
 
   // Load saved theme
-  const savedTheme = localStorage.getItem('theme');
+  const savedTheme = localStorage.getItem("theme");
   if (savedTheme) {
-    const savedIndex = themes.findIndex(t => t.name === savedTheme);
+    const savedIndex = themes.findIndex((t) => t.name === savedTheme);
     if (savedIndex !== -1) {
-        currentThemeIndex = savedIndex;
-        updateThemeUI(currentThemeIndex);
+      currentThemeIndex = savedIndex;
+      updateThemeUI(currentThemeIndex);
     }
   }
 
   // Event Listener Theme
-  themeBtn?.addEventListener('click', () => {
+  themeBtn?.addEventListener("click", () => {
     currentThemeIndex = (currentThemeIndex + 1) % themes.length;
     const newTheme = themes[currentThemeIndex];
     updateThemeUI(currentThemeIndex);
-    localStorage.setItem('theme', newTheme.name);
+    localStorage.setItem("theme", newTheme.name);
   });
 
   // Language Logic is simpler: just redirect
-  const langBtn = document.getElementById('lang-toggle');
-  
-  langBtn?.addEventListener('click', () => {
+  const langBtn = document.getElementById("lang-toggle");
+
+  langBtn?.addEventListener("click", () => {
     const currentPath = window.location.pathname;
-    if (currentPath.startsWith('/en')) {
-      const newPath = currentPath.replace('/en', '') || '/';
+    if (currentPath.startsWith("/en")) {
+      const newPath = currentPath.replace("/en", "") || "/";
       window.location.href = newPath;
     } else {
-      const newPath = '/en' + (currentPath === '/' ? '' : currentPath);
+      const newPath = "/en" + (currentPath === "/" ? "" : currentPath);
       window.location.href = newPath;
     }
   });
