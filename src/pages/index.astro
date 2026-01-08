@@ -34,14 +34,40 @@ import Layout from "../layouts/Layout.astro";
             >
           </div>
         </div>
-        <div class="hero-image animate-fade-in">
-          <div class="image-wrapper relative-container">
-            <div class="glow-effect"></div>
-            <img
-              src="/perfil.jpg"
-              alt="Max - Developer Profile"
-              class="profile-image animate-fade-in"
-            />
+        <div
+          class="hero-image animate-fade-in"
+          style="display: flex; justify-content: center;"
+        >
+          <div class="code-card">
+            <div class="code-header">
+              <div class="dot red"></div>
+              <div class="dot yellow"></div>
+              <div class="dot green"></div>
+            </div>
+            <div class="code-content">
+              <span class="code-keyword">const</span>
+              <span class="code-def">developer</span> = <span class="code-punc"
+                >{}<br />
+                <div style="padding-left: 20px;">
+                  <span class="code-prop">name</span>: <span class="code-string"
+                    >"Maximiliano Mendoza"</span
+                  >,<br />
+                  <span class="code-prop">role</span>: <span class="code-string"
+                    >"Software Engineer"</span
+                  >,<br />
+                  <span class="code-prop">experience</span>: <span
+                    class="code-string">"+3 Años"</span
+                  >,<br />
+                  <span class="code-prop">age</span>: <span class="code-number"
+                    >25</span
+                  >,<br />
+                  <span class="code-prop">status</span>: <span
+                    class="code-string">"Open to Work"</span
+                  ><br />
+                </div>
+                <span class="code-punc"></span>;</span
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -84,39 +110,44 @@ import Layout from "../layouts/Layout.astro";
               </div>
             </div>
           </div>
-          <!-- Code Card (Replaces Objective Card) -->
-          <div class="code-card">
-            <div class="code-header">
-              <div class="dot red"></div>
-              <div class="dot yellow"></div>
-              <div class="dot green"></div>
+          <!-- Profile Image & Objective Stack -->
+          <div style="display: flex; flex-direction: column; gap: 2rem;">
+            <!-- Profile Image -->
+            <div
+              class="image-wrapper relative-container"
+              style="justify-content: center;"
+            >
+              <div class="glow-effect"></div>
+              <img
+                src="/perfil.jpg"
+                alt="Max - Developer Profile"
+                class="profile-image animate-fade-in"
+              />
             </div>
-            <div class="code-content">
-              <span class="code-keyword">const</span>
-              <span class="code-def">developer</span> = <span class="code-punc"
-                >{}<br />
-                <div style="padding-left: 20px;">
-                  <span class="code-prop">name</span>: <span class="code-string"
-                    >"Maximiliano Mendoza"</span
-                  >,<br />
-                  <span class="code-prop">role</span>: <span class="code-string"
-                    >"Software Engineer"</span
-                  >,<br />
-                  <span class="code-prop">experience</span>: <span
-                    class="code-string">"+3 Años"</span
-                  >,<br />
-                  <span class="code-prop">location</span>: <span
-                    class="code-string">"Colima, MX"</span
-                  >,<br />
-                  <span class="code-prop">age</span>: <span class="code-number"
-                    >25</span
-                  >,<br />
-                  <span class="code-prop">status</span>: <span
-                    class="code-string">"Open to Work"</span
-                  ><br />
-                </div>
-                <span class="code-punc"></span>;</span
+
+            <!-- Objective Card -->
+            <div class="glass-card objective-card">
+              <h3>Mi Objetivo</h3>
+              <p>
+                Busco consolidarme como un desarrollador Full Stack capaz de
+                liderar proyectos que impacten positivamente a los usuarios. Me
+                entusiasma aprender nuevas tecnologías y metodologías ágiles.
+              </p>
+              <div
+                style="margin-bottom: 1.5rem; color: var(--color-text-muted); font-size: 0.95rem;"
               >
+                📍 Manzanillo, Colima, México
+              </div>
+              <div class="stat-row">
+                <div class="stat">
+                  <span class="number">3+</span>
+                  <span class="label">Años</span>
+                </div>
+                <div class="stat">
+                  <span class="number">10+</span>
+                  <span class="label">Repos</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
