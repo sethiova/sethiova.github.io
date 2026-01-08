@@ -464,6 +464,78 @@ a:hover {
 }
 
 /* Hide navigation buttons if only one image or specific condition */
-.lightbox-nav-hidden {
-    display: none;
+
+/* Code Card (IDE Style) */
+.code-card {
+    background: #1e1e1e;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    overflow: hidden;
+    width: 100%;
+    max-width: 480px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    align-self: center;
+    justify-self: center;
+    position: relative;
+    z-index: 10;
+}
+
+.code-header {
+    background: #252526;
+    padding: 12px 15px;
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.red {
+    background: #ff5f56;
+}
+
+.yellow {
+    background: #ffbd2e;
+}
+
+.green {
+    background: #27c93f;
+}
+
+.code-content {
+    padding: 24px;
+    color: #d4d4d4;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.code-keyword {
+    color: #c586c0;
+}
+
+.code-def {
+    color: #4ec9b0;
+}
+
+.code-prop {
+    color: #9cdcfe;
+}
+
+.code-string {
+    color: #ce9178;
+}
+
+.code-number {
+    color: #b5cea8;
+}
+
+.code-comment {
+    color: #6a9955;
+    font-style: italic;
 }
