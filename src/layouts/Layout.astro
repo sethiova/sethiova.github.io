@@ -184,8 +184,18 @@ const t = navTranslations[lang];
           if (gallery.parentElement.classList.contains("gallery-wrapper"))
             return;
 
-          const images = gallery.querySelectorAll("img");
-          if (images.length <= 1) return; // No need for nav if simple image
+          const originalImages = gallery.querySelectorAll("img");
+          if (originalImages.length <= 1) return; // No need for nav if simple image
+
+          // Create Clones for Infinite Loop
+          const firstClone = originalImages[0].cloneNode(true);
+          firstClone.classList.add("clone");
+          const lastClone =
+            originalImages[originalImages.length - 1].cloneNode(true);
+          lastClone.classList.add("clone");
+
+          gallery.appendChild(firstClone);
+          gallery.insertBefore(lastClone, gallery.firstChild);
 
           // Create wrapper
           const wrapper = document.createElement("div");
@@ -206,34 +216,76 @@ const t = navTranslations[lang];
           nextBtn.innerHTML = "&#10095;";
           nextBtn.classList.add("gallery-nav-btn", "gallery-next-btn");
 
+          // Re-query for all images including clones
+          const allImages = gallery.querySelectorAll("img");
+          const totalCount = allImages.length;
+          const realFirstIndex = 1;
+          const realLastIndex = totalCount - 2;
+
+          // Set Initial Position
+          const setInitialPos = () => {
+            if (allImages[realFirstIndex]) {
+              gallery.scrollLeft = allImages[realFirstIndex].offsetLeft;
+            }
+          };
+          setInitialPos();
+          if (document.readyState !== "complete") {
+            window.addEventListener("load", setInitialPos);
+          }
+
+          // Infinite Scroll Logic (Background Watcher)
+          let isScrolling;
+          gallery.addEventListener("scroll", () => {
+            clearTimeout(isScrolling);
+            isScrolling = setTimeout(() => {
+              const currentScroll = gallery.scrollLeft;
+
+              // Check Left Bound (First Item -> Last Clone)
+              if (currentScroll <= 10) {
+                gallery.scrollLeft = allImages[realLastIndex].offsetLeft;
+              }
+              // Check Right Bound (Last Item -> First Clone)
+              else if (
+                allImages[totalCount - 1] &&
+                Math.abs(currentScroll - allImages[totalCount - 1].offsetLeft) <
+                  10
+              ) {
+                gallery.scrollLeft = allImages[realFirstIndex].offsetLeft;
+              }
+            }, 1); // Fast check
+          });
+
           // Add events
           prevBtn.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
-            if (gallery.scrollLeft <= 20) {
-              gallery.scrollTo({ left: gallery.scrollWidth, behavior: "auto" });
-            } else {
-              gallery.scrollBy({
-                left: -gallery.clientWidth,
-                behavior: "smooth",
-              });
+
+            // Instant Teleport Check
+            if (gallery.scrollLeft <= 10) {
+              gallery.scrollLeft = allImages[realLastIndex].offsetLeft;
             }
+
+            gallery.scrollBy({
+              left: -gallery.clientWidth,
+              behavior: "smooth",
+            });
           });
 
           nextBtn.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
+
+            // Instant Teleport Check
+            const maxOffset = allImages[totalCount - 1].offsetLeft;
             if (
+              Math.abs(gallery.scrollLeft - maxOffset) < 10 ||
               gallery.scrollLeft + gallery.clientWidth >=
-              gallery.scrollWidth - 20
+                gallery.scrollWidth - 10
             ) {
-              gallery.scrollTo({ left: 0, behavior: "auto" });
-            } else {
-              gallery.scrollBy({
-                left: gallery.clientWidth,
-                behavior: "smooth",
-              });
+              gallery.scrollLeft = allImages[realFirstIndex].offsetLeft;
             }
+
+            gallery.scrollBy({ left: gallery.clientWidth, behavior: "smooth" });
           });
 
           wrapper.appendChild(prevBtn);
@@ -245,7 +297,7 @@ const t = navTranslations[lang];
             clearInterval(intervalId);
             intervalId = setInterval(() => {
               nextBtn.click();
-            }, 10000);
+            }, 6000);
             activeGalleryIntervals.push(intervalId);
           };
 
@@ -272,10 +324,7 @@ const t = navTranslations[lang];
 
         // Open Lightbox
         document.querySelectorAll(".project-img").forEach((img) => {
-          // Remove old listeners to avoid duplicates if re-init?
-          // Better: check if listener attached? Hard to do.
-          // Native 'click' duplicates are fine if functions are identical? No.
-          // Workaround: cloning node or simple flag.
+          if (img.classList.contains("clone")) return;
           if (img.dataset.lightboxAttached) return;
           img.dataset.lightboxAttached = "true";
 
@@ -285,7 +334,7 @@ const t = navTranslations[lang];
 
             if (gallery) {
               currentGalleryImages = Array.from(
-                gallery.querySelectorAll(".project-img"),
+                gallery.querySelectorAll(".project-img:not(.clone)"),
               );
               currentIndex = currentGalleryImages.indexOf(img);
             } else {
@@ -619,7 +668,7 @@ const t = navTranslations[lang];
   let currentThemeIndex = 0;
 
   // Initialize
-  function updateThemeUI(index) {
+  function updateThemeUI(index: number) {
     const theme = themes[index];
 
     // Set Attribute
