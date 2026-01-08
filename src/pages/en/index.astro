@@ -11,7 +11,8 @@ import Layout from "../../layouts/Layout.astro";
           <span class="badge">Available for new projects</span>
           <h1>
             Software Engineer | <br /><span class="text-gradient"
-              >Full Stack & Mobile Developer</span>
+              >Full Stack & Mobile Developer</span
+            >
           </h1>
           <p>
             Hi, I'm <strong>Max</strong>. Software Engineering student at
@@ -23,24 +24,6 @@ import Layout from "../../layouts/Layout.astro";
               target="_blank">ISAOSA</a
             >. I specialize in building modern and efficient digital solutions.
           </p>
-          <p
-            class="contact-info-hero"
-            style="font-size: 0.9rem; margin-top: -10px; margin-bottom: 20px; color: var(--color-text-muted);"
-          >
-            📍 Manzanillo, Colima, Mexico <span class="separator">|</span>
-            📞 <a
-              href="https://wa.me/523121351997?text=Hi%20Max,%20I%20saw%20your%20portfolio%20and%20I%20would%20like%20to%20contact%20you."
-              target="_blank"
-              style="color: inherit; text-decoration: underline;"
-              >+52 312 135 1997</a
-            >
-            <span class="separator">|</span>
-            ✉️ <a
-              href="mailto:maxiova312@gmail.com?subject=Portfolio%20Contact&body=Hi%20Max,"
-              style="color: inherit; text-decoration: underline;"
-              >maxiova312@gmail.com</a
-            >
-          </p>
           <div class="cta-group">
             <a href="#projects" class="btn btn-primary">View Projects</a>
             <a
@@ -50,40 +33,14 @@ import Layout from "../../layouts/Layout.astro";
             >
           </div>
         </div>
-        <div
-          class="hero-image animate-fade-in"
-          style="display: flex; justify-content: center;"
-        >
-          <div class="code-card">
-            <div class="code-header">
-              <div class="dot red"></div>
-              <div class="dot yellow"></div>
-              <div class="dot green"></div>
-            </div>
-            <div class="code-content">
-              <span class="code-keyword">const</span>
-              <span class="code-def">developer</span> = <span class="code-punc"
-                >{}<br />
-                <div style="padding-left: 20px;">
-                  <span class="code-prop">name</span>: <span class="code-string"
-                    >"Maximiliano Mendoza"</span
-                  >,<br />
-                  <span class="code-prop">role</span>: <span class="code-string"
-                    >"Software Engineer"</span
-                  >,<br />
-                  <span class="code-prop">location</span>: <span
-                    class="code-string">"Colima, MX"</span
-                  >,<br />
-                  <span class="code-prop">age</span>: <span class="code-number"
-                    >21</span
-                  >,<br />
-                  <span class="code-prop">status</span>: <span
-                    class="code-string">"Open to Work"</span
-                  ><br />
-                </div>
-                <span class="code-punc"></span>;</span
-              >
-            </div>
+        <div class="hero-image animate-fade-in">
+          <div class="image-wrapper relative-container">
+            <div class="glow-effect"></div>
+            <img
+              src="/perfil.jpg"
+              alt="Max - Developer Profile"
+              class="profile-image animate-fade-in"
+            />
           </div>
         </div>
       </div>
@@ -125,22 +82,39 @@ import Layout from "../../layouts/Layout.astro";
               </div>
             </div>
           </div>
-          <div class="glass-card objective-card">
-            <h3>My Goal</h3>
-            <p>
-              I aim to consolidate myself as a Full Stack developer capable of
-              leading projects that positively impact users. I am enthusiastic
-              about learning new technologies and agile methodologies.
-            </p>
-            <div class="stat-row">
-              <div class="stat">
-                <span class="number">3+</span>
-                <span class="label">Years Coding</span>
-              </div>
-              <div class="stat">
-                <span class="number">10+</span>
-                <span class="label">Repositories</span>
-              </div>
+          <!-- Code Card (Replaces Objective Card) -->
+          <div class="code-card">
+            <div class="code-header">
+              <div class="dot red"></div>
+              <div class="dot yellow"></div>
+              <div class="dot green"></div>
+            </div>
+            <div class="code-content">
+              <span class="code-keyword">const</span>
+              <span class="code-def">developer</span> = <span class="code-punc"
+                >{}<br />
+                <div style="padding-left: 20px;">
+                  <span class="code-prop">name</span>: <span class="code-string"
+                    >"Maximiliano Mendoza"</span
+                  >,<br />
+                  <span class="code-prop">role</span>: <span class="code-string"
+                    >"Software Engineer"</span
+                  >,<br />
+                  <span class="code-prop">experience</span>: <span
+                    class="code-string">"+3 Years"</span
+                  >,<br />
+                  <span class="code-prop">location</span>: <span
+                    class="code-string">"Colima, MX"</span
+                  >,<br />
+                  <span class="code-prop">age</span>: <span class="code-number"
+                    >25</span
+                  >,<br />
+                  <span class="code-prop">status</span>: <span
+                    class="code-string">"Open to Work"</span
+                  ><br />
+                </div>
+                <span class="code-punc"></span>;</span
+              >
             </div>
           </div>
         </div>
